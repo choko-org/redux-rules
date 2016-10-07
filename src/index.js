@@ -6,7 +6,7 @@ const insertRules = ({ rules = [] }) => {
   return store => next => action => {
     const { getState } = store
     const truthyReactions = rules
-      .filter(rule => rule.actionTypes.some(action.type))
+      .filter(byActionType(action.type))
       .filter(truthyCondition({ state: getState(), action }))
       .map(rule => rule.reaction)
 
@@ -30,6 +30,9 @@ const verifyStructure = rule => {
   return result
 }
 
-const truthyCondition = facts => rule => rule.condition(facts)
+export const truthyCondition = facts => rule => rule.condition(facts)
+
+export const byActionType = actionType => rule => rule.actionTypes
+  .some(type => type === actionType)
 
 export default insertRules
