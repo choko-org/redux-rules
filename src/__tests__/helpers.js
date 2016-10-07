@@ -23,7 +23,6 @@ test('Helpers: should filter by action type', assert => {
   assert.end()
 })
 
-
 test('Helpers: should filter rules with truthy conditions', assert => {
   const FLASH_MESSAGE = 'FLASH_MESSAGE'
   const SHOW_BANNER = 'SHOW_BANNER'
@@ -39,7 +38,7 @@ test('Helpers: should filter rules with truthy conditions', assert => {
   const loginRules = mockRules.filter(truthyCondition(mockFacts))
 
   assert.isEqual(loginRules.length, 2)
-  assert.looseEqual(loginRules[0].type, FLASH_MESSAGE)
+  assert.isEqual(loginRules[0].type, FLASH_MESSAGE)
   assert.isEqual(loginRules[1].type, HIDE_BANNER)
   assert.end()
 })

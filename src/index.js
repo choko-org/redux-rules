@@ -10,6 +10,7 @@ const insertRules = ({ rules = [] }) => {
       .filter(truthyCondition({ state: getState(), action }))
       .map(rule => rule.reaction)
 
+
     if (truthyReactions.length === 0) return next(action)
 
     return compose(...truthyReactions)(store)(next)(action)
@@ -19,7 +20,7 @@ const insertRules = ({ rules = [] }) => {
 const verifyStructure = rule => {
   const { type, condition, actionTypes, reaction } = rule
   const result = (typeof type === 'string') &&
-    (typeof actionTypes === 'array') &&
+    (typeof actionTypes === 'object') &&
     (typeof condition === 'function') &&
     (typeof reaction === 'function')
 
