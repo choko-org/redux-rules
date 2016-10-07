@@ -1,0 +1,58 @@
+# Node specific #
+#################
+# Ignore node modules.
+/node_modules
+
+# Builds #
+##########
+/dist
+
+# Documentation #
+#################
+/docs/_book
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.svn
+
+# OS generated files #
+######################
+.DS_Store*
+*.Trash*
+ehthumbs.db
+Icon?
+Thumbs.db
+*.orig
+*.swo
+*cwatch.pid
+
+# Editors generated files #
+###########################
+.project
+.settings
+*~
+*.sublime-project
+*.sublime-workspace
+*.sublime-projectcompletions
+nbproject
+.buildpath
+.idea
+.idea/*
+*.log
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
