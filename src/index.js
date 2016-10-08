@@ -37,4 +37,13 @@ export const byTruthyCondition = facts => rule => rule.condition(facts)
 export const byActionType = actionType => rule => rule.actionTypes
   .some(type => type === actionType)
 
+export const createOperators = facts => ({
+  every (conditions) {
+    return conditions.every(condition => condition(facts))
+  },
+  some (conditions) {
+    return conditions.some(condition => condition(facts))
+  }
+})
+
 export default insertRules

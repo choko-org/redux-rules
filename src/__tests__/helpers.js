@@ -1,5 +1,5 @@
 import test from 'tape'
-import { byTruthyCondition, byActionType } from '../index'
+import { byTruthyCondition, byActionType, createOperators } from '../index'
 
 test('Helpers: should filter by action type', assert => {
   const LOGIN = 'LOGIN'
@@ -40,5 +40,45 @@ test('Helpers: should filter rules with truthy conditions', assert => {
   assert.isEqual(loginRules.length, 2)
   assert.isEqual(loginRules[0].type, FLASH_MESSAGE)
   assert.isEqual(loginRules[1].type, HIDE_BANNER)
+  assert.end()
+})
+
+test('Helpers: should every conditions be truthy', assert => {
+  const facts = {
+    user: {
+      likes: ['bike', 'travel', 'beach'],
+      location: 'Floripa, Brazil'
+    },
+  }
+
+  const { every } = createOperators(facts)
+
+  const likesBeach = ({ user: { likes } }) => likes.some(like => like === 'beach')
+  const likesTravel = ({ user: { likes } }) => likes.some(like => like === 'travel')
+  const locatesInFloripa = ({ user: { location } }) => location.indexOf('Floripa') !== false
+
+  const conditions = [likesBeach, likesTravel, locatesInFloripa]
+
+  assert.ok(every(conditions), 'All conditions are true')
+  assert.end()
+})
+
+test('Helpers: should some conditions be truthy', assert => {
+  const facts = {
+    user: {
+      likes: ['bike', 'travel', 'beach'],
+      location: 'São Paulo, Brazil'
+    },
+  }
+
+  const { some } = createOperators(facts)
+
+  const likesBeach = ({ user: { likes } }) => likes.some(like => like === 'beach')
+  const likesTravel = ({ user: { likes } }) => likes.some(like => like === 'travel')
+  const locatesInFloripa = ({ user: { location } }) => location.indexOf('São Paulo') === false
+
+  const conditions = [likesBeach, likesTravel, locatesInFloripa]
+
+  assert.ok(some(conditions), 'Some of the conditions are true')
   assert.end()
 })
