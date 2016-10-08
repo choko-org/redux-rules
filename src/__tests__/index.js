@@ -10,7 +10,7 @@ test('Rules should have a basic structure', assert => {
   const welcomeMessageRule = {
     type: WELCOME_MESSAGE,
     actionTypes: [ LOGIN_SUCCESS ],
-    condition: () => true,
+    condition: facts => true,
     reaction: store => next => action => next(action)
   }
 
@@ -28,10 +28,13 @@ test('Rules should react and dispatch a new action', assert => {
   const FLASH_MESSAGE = 'system/FLASH_MESSAGE'
   const WELCOME_MESSAGE = 'users/login/WELCOME_MESSAGE'
 
+  const userIsAdminCondition = facts => facts.action.payload
+    .user.roles.some(role => role === 'admin')
+
   const welcomeMessageRule = {
     type: WELCOME_MESSAGE,
     actionTypes: [ LOGIN_SUCCESS ],
-    condition: facts => facts.action.payload.user.name === 'Sebas',
+    condition: userIsAdminCondition,
     reaction: ({ getState, dispatch }) => next => action => {
       const nextResult = next(action)
 
@@ -71,9 +74,13 @@ test('Rules should react and dispatch a new action', assert => {
 
   store.dispatch({
     type: LOGIN_SUCCESS,
-    payload: { user: { name: 'Sebas' } }
+    payload: { user: {
+      name: 'Manolo',
+      roles: ['admin', 'authenticated']
+    }}
   })
 
-  assert.isEqual(store.getState().message, 'Hello Sebas!')
+  const { message } = store.getState()
+  assert.isEqual(store.getState().message, 'Hello Manolo!')
   assert.end()
 })
