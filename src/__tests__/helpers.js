@@ -1,5 +1,5 @@
 import test from 'tape'
-import { truthyCondition, byActionType } from '../index'
+import { byTruthyCondition, byActionType } from '../index'
 
 test('Helpers: should filter by action type', assert => {
   const LOGIN = 'LOGIN'
@@ -35,7 +35,7 @@ test('Helpers: should filter rules with truthy conditions', assert => {
   ]
 
   const mockFacts = { name: 'Pedro' }
-  const loginRules = mockRules.filter(truthyCondition(mockFacts))
+  const loginRules = mockRules.filter(byTruthyCondition(mockFacts))
 
   assert.isEqual(loginRules.length, 2)
   assert.isEqual(loginRules[0].type, FLASH_MESSAGE)

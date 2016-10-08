@@ -3,7 +3,6 @@ import { createStore, applyMiddleware } from 'redux'
 import insertRules from '../index'
 
 test('Rules should have a basic structure', assert => {
-
   const LOGIN_SUCCESS = 'users/login/SUCESS'
   const WELCOME_MESSAGE = 'users/login/WELCOME_MESSAGE'
 
@@ -49,13 +48,13 @@ test('Rules should react and dispatch a new action', assert => {
     }
   }
 
+  // Here's the magic.
   const mockMiddlewareWithRule = insertRules({ rules: [welcomeMessageRule] })
 
   const mockMiddlewares = [mockMiddlewareWithRule]
 
   // @TODO: Create a redux store with the middleware.
   const reducer = (state = {}, action) => {
-
     if (action.type === LOGIN_SUCCESS) {
       return { ...state, user: action.payload.user }
     }
@@ -77,10 +76,9 @@ test('Rules should react and dispatch a new action', assert => {
     payload: { user: {
       name: 'Manolo',
       roles: ['admin', 'authenticated']
-    }}
+    } }
   })
 
-  const { message } = store.getState()
   assert.isEqual(store.getState().message, 'Hello Manolo!')
   assert.end()
 })

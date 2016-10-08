@@ -7,9 +7,8 @@ const insertRules = ({ rules = [] }) => {
     const { getState } = store
     const truthyReactions = rules
       .filter(byActionType(action.type))
-      .filter(truthyCondition({ state: getState(), action }))
+      .filter(byTruthyCondition({ state: getState(), action }))
       .map(rule => rule.reaction)
-
 
     if (truthyReactions.length === 0) return next(action)
 
@@ -19,8 +18,10 @@ const insertRules = ({ rules = [] }) => {
 
 const verifyStructure = rule => {
   const { type, condition, actionTypes, reaction } = rule
+
+  // @TODO: Should be better ways of doing schema check.
   const result = (typeof type === 'string') &&
-    (typeof actionTypes === 'object') &&
+    Array.isArray(actionTypes) &&
     (typeof condition === 'function') &&
     (typeof reaction === 'function')
 
@@ -31,7 +32,7 @@ const verifyStructure = rule => {
   return result
 }
 
-export const truthyCondition = facts => rule => rule.condition(facts)
+export const byTruthyCondition = facts => rule => rule.condition(facts)
 
 export const byActionType = actionType => rule => rule.actionTypes
   .some(type => type === actionType)
