@@ -1,7 +1,7 @@
 {
   "name": "redux-rules",
   "version": "0.0.1",
-  "description": "Rules system for Redux.",
+  "description": "Rules API for Redux.",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run build:commonjs",
@@ -16,6 +16,7 @@
   ],
   "author": "",
   "license": "MIT",
+  "repository": "choko-org/redux-rules",
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
@@ -34,8 +35,7 @@
     "tap-diff": "^0.1.1",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.2",
-    "tape-watch": "^2.2.3",
-    "webpack": "^1.13.2"
+    "tape-watch": "^2.2.3"
   },
   "peerDependencies": {
     "redux": "^3.6.0"
