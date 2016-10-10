@@ -1,6 +1,6 @@
 {
   "name": "redux-rules",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Rules API for Redux.",
   "main": "dist/index.js",
   "scripts": {
