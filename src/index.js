@@ -5,7 +5,7 @@ const insertRules = ({ rules = [] }) => {
 
   return store => next => action => {
     const { getState } = store
-    const truthyReactions = rules
+    const truthyReactions = verifiedRules
       .filter(byActionType(action.type))
       .filter(byTruthyCondition({ state: getState(), action }))
       .map(rule => rule.reaction)
@@ -37,13 +37,9 @@ export const byTruthyCondition = facts => rule => rule.condition(facts)
 export const byActionType = actionType => rule => rule.actionTypes
   .some(type => type === actionType)
 
-export const createOperators = facts => ({
-  every (conditions) {
-    return conditions.every(condition => condition(facts))
-  },
-  some (conditions) {
-    return conditions.some(condition => condition(facts))
-  }
-})
+export const every = conditions => facts => conditions.every(condition => condition(facts))
+export const some = conditions => facts => conditions.some(condition => condition(facts))
+export const notEvery = conditions => facts => conditions.every(condition => !condition(facts))
+export const notSome = conditions => facts => conditions.some(condition => !condition(facts))
 
 export default insertRules

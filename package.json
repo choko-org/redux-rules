@@ -1,6 +1,6 @@
 {
   "name": "redux-rules",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Rules API for Redux.",
   "main": "dist/index.js",
   "scripts": {
@@ -26,10 +26,7 @@
     "eslint": "^3.0.1",
     "eslint-config-rackt": "^1.1.1",
     "eslint-config-standard": "^5.3.1",
-    "eslint-config-standard-jsx": "^1.2.1",
-    "eslint-config-standard-react": "^2.5.0",
     "eslint-plugin-promise": "^1.3.2",
-    "eslint-plugin-react": "^5.2.2",
     "eslint-plugin-standard": "^1.3.2",
     "rimraf": "^2.5.4",
     "tap-diff": "^0.1.1",
