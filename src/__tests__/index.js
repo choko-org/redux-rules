@@ -1,6 +1,6 @@
 import test from 'tape'
 import { createStore, applyMiddleware } from 'redux'
-import insertRules from '../index'
+import combineRules from '../index'
 
 test('Rules should have a basic structure', assert => {
   const LOGIN_SUCCESS = 'users/login/SUCESS'
@@ -15,7 +15,7 @@ test('Rules should have a basic structure', assert => {
 
   const { condition, ...ruleWithoutCondition } = welcomeMessageRule
   assert.throws(
-    () => insertRules({ rules: [ruleWithoutCondition] }),
+    () => combineRules({ rules: [ruleWithoutCondition] }),
     /WELCOME_MESSAGE/
   )
   assert.end()
@@ -48,7 +48,7 @@ test('Rules should react and dispatch a new action', assert => {
   }
 
   // Here's the magic.
-  const mockMiddlewareWithRule = insertRules({ rules: [welcomeMessageRule] })
+  const mockMiddlewareWithRule = combineRules({ rules: [welcomeMessageRule] })
 
   const mockMiddlewares = [mockMiddlewareWithRule]
 

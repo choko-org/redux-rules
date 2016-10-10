@@ -1,6 +1,6 @@
 import { compose } from 'redux'
 
-const insertRules = ({ rules = [] }) => {
+const combineRules = ({ rules = [] }) => {
   const verifiedRules = rules.filter(verifyStructure)
 
   return store => next => action => {
@@ -8,11 +8,13 @@ const insertRules = ({ rules = [] }) => {
     const truthyReactions = verifiedRules
       .filter(byActionType(action.type))
       .filter(byTruthyCondition({ state: getState(), action }))
-      .map(rule => rule.reaction)
+      .map(rule => rule.reaction(store))
 
     if (truthyReactions.length === 0) return next(action)
 
-    return compose(...truthyReactions)(store)(next)(action)
+    // @TODO Dispatch action with the type of each truthy Rule.
+
+    return compose(...truthyReactions)(next)(action)
   }
 }
 
@@ -39,7 +41,7 @@ export const byActionType = actionType => rule => rule.actionTypes
 
 export const every = conditions => facts => conditions.every(condition => condition(facts))
 export const some = conditions => facts => conditions.some(condition => condition(facts))
-export const notEvery = conditions => facts => conditions.every(condition => !condition(facts))
-export const notSome = conditions => facts => conditions.some(condition => !condition(facts))
+export const notEvery = conditions => facts => !conditions.every(condition => condition(facts))
+export const notSome = conditions => facts => !conditions.some(condition => condition(facts))
 
-export default insertRules
+export default combineRules
