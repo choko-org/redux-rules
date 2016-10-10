@@ -41,7 +41,7 @@ export const byActionType = actionType => rule => rule.actionTypes
 
 export const every = conditions => facts => conditions.every(condition => condition(facts))
 export const some = conditions => facts => conditions.some(condition => condition(facts))
-export const notEvery = conditions => facts => !conditions.every(condition => condition(facts))
-export const notSome = conditions => facts => !conditions.some(condition => condition(facts))
+export const notEvery = conditions => facts => !every(conditions)(facts)
+export const notSome = conditions => facts => !some(conditions)(facts)
 
 export default combineRules
