@@ -1,11 +1,13 @@
 # Rules API for Redux
 Make your code more easy to reason about with a more natural language for your
 logic, using rules fired by actions and reacting to a given set of facts.
-Based on the forward-chaining rules in Clojure called [Clara](https://github.com/rbrush/clara-rules) and a discussion from and [issue](https://github.com/choko-org/choko-core/issues/1)
+Based on the forward-chaining rules in Clojure called [Clara](https://github.com/rbrush/clara-rules) and a discussion from an [issue](https://github.com/choko-org/choko-core/issues/1)
 of Choko core.
 
 ### Where Redux gets in?
+```
 [ACTION] => [RULES] -> [CONDITIONS] -> [REACTIONS] => [ACTION]
+```
 
 Redux gives us the tools to build functional rules systems using it's middleware API.
 So basically each rule behaves like a Redux's middleware.
@@ -70,7 +72,9 @@ const welcomeAuthUserMessageRule = {
   }
 }
 
-const rulesMiddleware = combineRules([welcomeAuthUserMessageRule])
+const rulesMiddleware = combineRules({
+  rules: [welcomeAuthUserMessageRule]
+})
 
 const reducer = (state, action) => {
   if (action.type === LOGIN_SUCCESS) {
