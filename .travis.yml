@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '5'
+deploy:
+  provider: npm
+  email: choko@choko.org
+  api_key:
+    secure: Tg09+e0/z4P0NcVWeN3r4F5DmFGyYC/Z6fNYJTVXgvIEXyBwrzBmj+WjlWUdTpPSaKW9qWle0tVbcC35UAueV02sxelNrRxaN1W0Afelb9L8tTfs6v1TvbhQPw57x+Z7NyX7bBOezvLJOmsnG8pX8W6Wu4r3HZBU8lRlQtEvVZ6IC6GpA5ytzTdRs4W89caqxOWz/QjEqp8Bj43XChUy8w+/g0apukRtm01NHfJbAe7qHztqduaN2IlojhtyI6OKb43opNOZQWcR2wqgCPGVEhdR5lOZ69FgOV7D0t6iRH8W0f1fF7KT59xK8eVtOdCC7Gi52/axGQ12IwhqY6M8xgSA+7jWXXj0/LV52q51IDf1SUVNsEQP5sxkGFJWorquzK4hw6LWRdTna+wBVlma+vujYPKohloPK6etgvnSTwI7+87KWnI3vSJ1heHuSt8r4wcms2t015td30du5LZexzyWgvlF8GwS63AO4/QccVFbNAyJF+6/K8FqeaztXHBeUYgEXL+bKMDmuJLmWjZRO7SWXaK31GBfzzhZyP7qFn0zbJva3pbBZ99HklpvzHJeUjgQAOV08ibLbMfYIUHsnMc5f3i0gCp79efZ+1OzoVc/Y+qSM15Fkqyzx3Uowpj7vYnTn4cZG/GPaHT22fhBmVJg3ELB8ncOpZAR4dQev8E=
+  on:
+    tags: true
+    repo: choko-org/redux-rules
