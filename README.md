@@ -1,8 +1,12 @@
-# Rules API for Redux
-Make your code more easy to reason about with a more natural language for your
-logic, using rules fired by actions and reacting to a given set of facts.
+# Rules API for [Redux](http://redux.js.org)
+Make your code more easy to reason about with a more **natural language for your
+logic**, using rules fired by actions and reacting to a given set of facts.
+
 Based on the forward-chaining rules in Clojure called [Clara](https://github.com/rbrush/clara-rules) and a discussion from an [issue](https://github.com/choko-org/choko-core/issues/1)
 of Choko core.
+
+[![Build Status](https://travis-ci.org/choko-org/redux-boot.svg?branch=master)](https://travis-ci.org/choko-org/redux-boot)
+
 
 ### Where Redux gets in?
 ```
