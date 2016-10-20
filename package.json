@@ -4,6 +4,7 @@
   "description": "Rules API for Redux.",
   "main": "dist/index.js",
   "scripts": {
+    "postinstall": "npm info \"$PKG\" peerDependencies --json | command sed 's/[\\{\\},]//g ; s/: /@/g' | xargs npm install \"$PKG\"",
     "build": "npm run build:commonjs",
     "build:commonjs": "babel src --out-dir dist --ignore __tests__/*",
     "test": "tape -r babel-register src/**/__tests__/**/*.js | tap-diff",
