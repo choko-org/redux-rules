@@ -4,8 +4,6 @@ import {
   byActionType,
   every,
   some,
-  notSome,
-  notEvery,
 } from '../index'
 
 test('Helpers: should filter by action type', assert => {

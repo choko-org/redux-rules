@@ -13,7 +13,6 @@
     beforeEach: false,
     jasmine: false,
     document: false,
-    drupalSettings: false,
     __DEBUG__: false,
   },
   rules: {

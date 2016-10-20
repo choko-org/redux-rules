@@ -6,16 +6,17 @@ of Choko core.
 
 ### Where Redux gets in?
 ```
-[ACTION] => [RULES] -> [CONDITIONS] -> [REACTIONS] => [ACTION]
+[ACTION] => ([RULES] -> [CONDITIONS] -> [REACTIONS]) => [STATE]
 ```
+*Obs.: Reactions are dispatched actions / side-effects.*
 
 Redux gives us the tools to build functional rules systems using it's middleware API.
 So basically each rule behaves like a Redux's middleware.
 
-## Pure Redux:
+## Vanilla Redux:
 ```js
 import { createStore, applyMiddleware} from 'redux'
-import { flashMessage } from 'app/modules/messages/actions'
+import { flashMessage, FLASH_MESSAGE } from 'app/modules/messages/actions'
 
 const LOGIN_SUCCESS = 'user/login/SUCCESS'
 
@@ -37,21 +38,27 @@ const reducer = (state, action) => {
   if (action.type === LOGIN_SUCCESS) {
     return { ...state, user: action.payload.user }
   }
+
+  if (action.type === FLASH_MESSAGE) {
+    return { ...state, message: action.payload }
+  }
 }
 
 const store = createStore(reducer, applyMiddleware(welcomeAuthUserMiddleware))
 
 store.dispatch({
   type: LOGIN_SUCCESS,
-  payload: { user: { roles: ['authenticated'] } }
+  payload: { user: { name: 'Manolo', roles: ['authenticated'] } }
 })
+
+console.log(getState().message) // Good to see you Manolo!
 ```
 
-## With Redux Rules:
+## Using Redux Rules:
 ```js
 import { createStore, applyMiddleware } from 'redux'
 import combineRules, { every } from 'redux-rules'
-import { flashMessage } from 'app/modules/messages/actions'
+import { flashMessage, FLASH_MESSAGE } from 'app/modules/messages/actions'
 
 const LOGIN_SUCCESS = 'user/login/SUCCESS'
 
@@ -80,14 +87,20 @@ const reducer = (state, action) => {
   if (action.type === LOGIN_SUCCESS) {
     return { ...state, user: action.payload.user }
   }
+
+  if (action.type === FLASH_MESSAGE) {
+    return { ...state, message: action.payload }
+  }
 }
 
 const store = createStore(reducer, applyMiddleware(rulesMiddleware))
 
 store.dispatch({
   type: LOGIN_SUCCESS,
-  payload: { user: { roles: ['authenticated'] } }
+  payload: { user: { name: 'Manolo', roles: ['authenticated'] } }
 })
+
+console.log(getState().message) // Good to see you Manolo!
 ```
 
 ## Usage:
