@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - '6'
+install:
+  npm install
+  npm run install:peers
 deploy:
   provider: npm
   email: choko@choko.org
